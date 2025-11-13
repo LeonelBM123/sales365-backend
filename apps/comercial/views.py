@@ -249,6 +249,32 @@ class CategoriaViewSet(TenantAwareViewSet):
     @action(
         detail=False,
         methods=['get'],
+        permission_classes=[IsAuthenticated],
+        url_path='con-productos'
+    )
+    def con_productos(self, request):
+        """
+        Endpoint para obtener categorías con el contador de productos activos.
+        Retorna categorías que tienen al menos 1 producto activo.
+        """
+        from django.db.models import Count, Q
+        
+        queryset = self.get_queryset().filter(estado=True).annotate(
+            total_productos=Count('productos', filter=Q(productos__estado=True))
+        ).filter(total_productos__gt=0)
+        
+        serializer = self.get_serializer(queryset, many=True)
+        
+        # Agregar el contador al response
+        data = serializer.data
+        for i, categoria in enumerate(queryset):
+            data[i]['total_productos'] = categoria.total_productos
+        
+        return Response(data)
+    
+    @action(
+        detail=False,
+        methods=['get'],
         permission_classes=[permissions.AllowAny],
         url_path='public-con-productos'
     )
