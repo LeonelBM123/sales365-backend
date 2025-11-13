@@ -1,0 +1,28 @@
+# Archivos de Entorno Virtual
+# Ignora la carpeta del entorno virtual, que contiene las librerías instaladas.
+/venv/
+
+# Base de Datos
+# Ignora la base de datos local de desarrollo.
+db.sqlite3
+
+# Archivos de entorno
+# NUNCA subas tus variables de entorno (claves secretas, contraseñas de BD, etc.)
+.env
+
+# Archivos generados por Python
+# Ignora las carpetas de caché y archivos compilados de Python.
+__pycache__/
+*.pyc
+
+# Archivos de Media
+# Ignora los archivos que los usuarios suben (imágenes de perfil, documentos, etc.)
+/media/
+
+# Archivos Estáticos
+# Ignora la carpeta que Django crea al recolectar todos los archivos estáticos para producción.
+/staticfiles/
+
+# Archivos de configuración de IDEs (Opcional, pero buena práctica)
+.vscode/
+.idea/
