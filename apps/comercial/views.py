@@ -258,7 +258,7 @@ class CategoriaViewSet(TenantAwareViewSet):
         Retorna categorías que tienen al menos 1 producto activo.
         """
         from django.db.models import Count, Q
-        
+        print("fasdf");
         queryset = self.get_queryset().filter(estado=True).annotate(
             total_productos=Count('productos', filter=Q(productos__estado=True))
         ).filter(total_productos__gt=0)
